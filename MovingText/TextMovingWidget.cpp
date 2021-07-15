@@ -2,12 +2,12 @@
 #include <QTimer>
 #include <QPainter>
 TextMovingWidget::TextMovingWidget(const QString str ,QWidget *parent)
-    : QWidget(parent),_text(str),m_x(0), _y(0)
+    : QWidget(parent),_text(str),_x(0), _y(0)
 {
     _timer=new QTimer(this);
     connect(_timer,SIGNAL(timeout()),this,SLOT(slot_UpdateTextGeometry()));
     _timer->start(30);
-    _yFlag = false;
+    _yFlag = true;
     //_xFlag = false;
 }
 
@@ -16,7 +16,7 @@ TextMovingWidget::~TextMovingWidget(){}
 void TextMovingWidget::setText(const QString &t)
 {
     _text = t;
-    m_x = 0;
+    _x = 0;
     _y = 0;
     update();
 }
@@ -28,9 +28,9 @@ void TextMovingWidget::paintEvent(QPaintEvent *e)
     p.setPen(Qt::red);
     QFontMetrics metric(font());
 
-    p.drawText(m_x, _y, getTextWidth(), getTextHeight(),Qt::AlignLeft,_text);
+    p.drawText(_x, _y, getTextWidth(), getTextHeight(),Qt::AlignLeft,_text);
     if(_xFlag && getTextWidth() > width()){
-        int endX = m_x ? m_x - getTextWidth() : m_x + getTextWidth();
+        int endX = _x ? _x - getTextWidth() : _x + getTextWidth();
         if(endX < width()){
             p.drawText(endX, _y, getTextWidth(), getTextHeight(),Qt::AlignLeft,_text);
         }
@@ -38,7 +38,7 @@ void TextMovingWidget::paintEvent(QPaintEvent *e)
     if(_yFlag && getTextHeight() > height()){
         int endY = _y ? _y - getTextHeight() : _y + getTextHeight();
         if(endY < height()){
-            p.drawText(m_x, endY, getTextWidth(), getTextHeight(),Qt::AlignLeft,_text);
+            p.drawText(_x, endY, getTextWidth(), getTextHeight(),Qt::AlignLeft,_text);
         }
     }
 }
@@ -81,13 +81,13 @@ void TextMovingWidget::updateTextGeometry(int offsetX, int offsetY)
 {
     QFontMetrics metric(font());
     metric.horizontalAdvance(_text);
-    if(m_x < 0 && m_x + getTextWidth() == 0 ){
-        m_x = 0;
+    if(_x < 0 && _x + getTextWidth() == 0 ){
+        _x = 0;
     }
-    if(m_x + getTextWidth() == 0 || m_x - getTextWidth() == 0 ){
-        m_x = 0;
+    if(_x + getTextWidth() == 0 || _x - getTextWidth() == 0 ){
+        _x = 0;
     }
-    m_x += offsetX;
+    _x += offsetX;
 
     if(_y < 0 && _y + getTextHeight() == 0 ){
         _y = 0;

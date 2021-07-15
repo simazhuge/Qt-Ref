@@ -22,8 +22,8 @@ private slots:
 private:
     QTimer *_timer;
     QString _text;
-    int m_x;
-    int _y;
+    int _x;//X轴位置
+    int _y;//Y轴位置
     bool _yFlag;//Y轴走马灯
     bool _xFlag;//X轴走马灯
 };

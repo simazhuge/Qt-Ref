@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>TAwesomeIcon.qml</file>
+        <file>TIcon.qml</file>
+        <file>TSVGIcon.qml</file>
+        <file>svg/close.svg</file>
+        <file>svg/close-px.svg</file>
+        <file>svg/error.svg</file>
+        <file>svg/info.svg</file>
+        <file>svg/success.svg</file>
+        <file>svg/warning.svg</file>
+        <file>font/fontawesome-webfont.ttf</file>
+        <file>font/mask.cso</file>
+        <file>font/svg.cso</file>
+    </qresource>
+</RCC>
